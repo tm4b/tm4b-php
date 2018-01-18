@@ -36,7 +36,7 @@ Here is a quick example:
 ```php
 <?php
 
-$msgClient = Tm4b\Rest\Client::create([
+$msgClient = \Tm4b\Rest\Client::create([
     'apiKey' => 'TM4B_API_KEY'
 ]);
 
