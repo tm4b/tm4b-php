@@ -48,12 +48,7 @@ try {
     ]);
     print_r($response);
 } catch (\Tm4b\Exception\HttpClientException $e) {
-    //json decode related error can be captured with
-    if($e instanceof \Tm4b\Exception\DecodeException) {
-        print_r($e->getResponseBody());
-    } else {
-        print_r($e->getResponseBody());
-    }
+    print_r($e->getResponseBody());
 }
 ```
 
