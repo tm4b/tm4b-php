@@ -28,16 +28,13 @@ class Message
      * @var array
      */
     private $attributes = [
-        'from',
-        'to',
-        'message',
-        'message_reference',
-        'unicode',
-        'expiry',
-        'concat_reference',
-        'concat_count ',
-        'concat_order ',
-        'custom_args ',
+        'source_address',
+        'destination_address',
+        'destination_country',
+        'content',
+        'delivery_life',
+        'callback_url',
+        'custom_args '
     ];
 
     /**
@@ -57,7 +54,7 @@ class Message
     {
         Assert::isArray($messages);
 
-        if (isset($messages['to']) || isset($messages['from']) || isset($messages['message'])) {
+        if (isset($messages['destination_address']) || isset($messages['source_address']) || isset($messages['content'])) {
             $messages = [$messages];
         }
 
@@ -73,9 +70,8 @@ class Message
         Assert::isArray($messages);
 
         foreach ($messages as $key => $message) {
-            Assert::notEmpty($message['from']);
-            Assert::notEmpty($message['to']);
-            Assert::notEmpty($message['message']);
+            Assert::notEmpty($message['destination_address']);
+            Assert::notEmpty($message['content']);
 
             foreach ($message as $param) {
                 if (!isset($this->attributes[$param])) {
