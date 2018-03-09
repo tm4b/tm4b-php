@@ -42,9 +42,9 @@ $msgClient = \Tm4b\Rest\Client::create([
 
 try {
     $response = $msgClient->messages()->send([
-        'to'        => '+441234567890',
-        'from'      => 'master',
-        'message'   => 'There is a civil war between the Galactic Empire and a Rebel Alliance.'
+        'destination_address' => '+441234567890',
+        'source_address'      => 'master',
+        'content'             => 'There is a civil war between the Galactic Empire and a Rebel Alliance.'
     ]);
     print_r($response);
 } catch (\Tm4b\Exception\HttpClientException $e) {
