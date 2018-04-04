@@ -41,7 +41,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     /**
      * API URL
      */
-    const API_URL = 'https://www.tm4b.com/api/rest/v1';
+    const API_URL = 'https://api.tm4b.com/v1';
 
     /**
      * Setup
@@ -84,7 +84,6 @@ class ClientTest extends \PHPUnit_Framework_TestCase
             $request,
             [
                 'Content-Type' => 'application/json',
-                'Accept' => 'application/json',
                 'Authorization' => sprintf("Bearer %s", $this->apiKey),
             ]
         );
@@ -111,8 +110,11 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     protected function createMockRequest($requestMethod = 'GET', array $params = [])
     {
         $request = (new \Zend\Diactoros\Request())
-            ->withUri(new \Zend\Diactoros\Uri('http://example.com'))
+            ->withUri(new \Zend\Diactoros\Uri('https://api.tm4b.com/v1'))
             ->withMethod($requestMethod);
+
+        $request = $request->withHeader('Content-Type', 'application/json');
+        $request = $request->withHeader('Authorization', sprintf("Bearer %s", $this->apiKey));
 
         if ($requestMethod != 'GET') {
             $request->getBody()->write(json_encode($params));

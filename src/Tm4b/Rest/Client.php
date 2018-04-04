@@ -51,7 +51,7 @@ class Client implements ClientInterface
      * Valid options for requests that can be overridden with the setOptions
      */
     private $validOptions = [
-        'host' => 'www.tm4b.com',
+        'host' => 'api.tm4b.com',
         'scheme' => 'https',
         'apiKey' => null,
         'version' => 'v1',
@@ -231,7 +231,7 @@ class Client implements ClientInterface
         $queryString = (empty($params)) ? '' : sprintf("?%s", http_build_query($params));
 
         return sprintf(
-            "%s://%s/api/rest/%s%s",
+            "%s://%s/%s%s",
             $options['scheme'],
             $options['host'],
             $options['version'],
