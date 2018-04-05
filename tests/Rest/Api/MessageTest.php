@@ -11,20 +11,7 @@ use Tm4bTest\TestCase;
  */
 class MessageTest extends TestCase
 {
-    protected $messages;
-
-    public function setUp()
-    {
-        parent::setUp();
-        $this->messages = new Message($this->createMockRestClient());
-    }
-
     public function testConstructor()
-    {
-        $this->assertTrue(true);
-    }
-
-    public function testSend()
     {
         $this->assertTrue(true);
     }

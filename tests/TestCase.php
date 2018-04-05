@@ -5,7 +5,7 @@ namespace Tm4bTest;
 use Http\Message\MessageFactory\DiactorosMessageFactory;
 use Http\Mock\Client as MockClient;
 use Tm4b\Rest\Client;
-use Tm4b\Rest\ClientInterface;
+use Tm4bTest\Mock\RestClient;
 use Zend\Diactoros\Request;
 
 /**
@@ -15,17 +15,12 @@ use Zend\Diactoros\Request;
 class TestCase extends \PHPUnit_Framework_TestCase
 {
     /**
-     * @var MockClient
-     */
-    protected $mockClient;
-
-    /**
      * @var Request
      */
     protected $mockRequest;
 
     /**
-     * @var ClientInterface
+     * @var Client
      */
     protected $restClient;
 
@@ -44,8 +39,7 @@ class TestCase extends \PHPUnit_Framework_TestCase
      */
     public function setUp()
     {
-        $this->apiKey = getenv('TM4B_API_KEY');
-        $this->mockClient = $this->createMockClient();
+        $this->apiKey = 'test_only';
         $this->mockRequest = $this->createMockRequest();
         $this->restClient = $this->createMockRestClient();
     }
@@ -57,7 +51,6 @@ class TestCase extends \PHPUnit_Framework_TestCase
     protected function createMockClient()
     {
         $http = new MockClient(new DiactorosMessageFactory());
-
         return $http;
     }
 
@@ -86,13 +79,10 @@ class TestCase extends \PHPUnit_Framework_TestCase
 
     /**
      * @param array $options
-     * @return Client
+     * @return RestClient
      */
-    protected function createMockRestClient(array $options=[])
+    protected function createMockRestClient()
     {
-        if(!isset($options['apiKey'])) {
-            $options['apiKey'] = $this->apiKey;
-        }
-        return new Client($this->mockClient, $options);
+        return new RestClient();
     }
 }

@@ -30,7 +30,7 @@ class ClientTest extends TestCase
         $request = $this->createMockRequest();
         $client->send($request);
 
-        $request = $this->mockClient->getRequests()[0];
+        $request = $client->getHttpClient()->getLastRequest();
         $this->assertRequestHasUri($request, self::API_URL);
     }
 
@@ -46,7 +46,7 @@ class ClientTest extends TestCase
         $request = $this->createMockRequest();
         $client->send($request);
 
-        $request = $this->mockClient->getRequests()[0];
+        $request = $client->getHttpClient()->getLastRequest();
         $this->assertMessageHasHeaders(
             $request,
             [
@@ -65,7 +65,7 @@ class ClientTest extends TestCase
         $client = $this->createMockRestClient();
         $client->get('/messages', []);
 
-        $request = $this->mockClient->getRequests()[0];
+        $request = $client->getHttpClient()->getLastRequest();
         $this->assertRequestIsGet($request);
     }
 
@@ -78,7 +78,7 @@ class ClientTest extends TestCase
         $client = $this->createMockRestClient();
         $client->post('/messages', ['first_name' => 'John']);
 
-        $request = $this->mockClient->getRequests()[0];
+        $request = $client->getHttpClient()->getLastRequest();
         $this->assertRequestIsPost($request);
     }
 
@@ -90,7 +90,7 @@ class ClientTest extends TestCase
         $client = $this->createMockRestClient();
         $client->post('/messages', ['first_name' => 'John']);
 
-        $request = $this->mockClient->getRequests()[0];
+        $request = $client->getHttpClient()->getLastRequest();
         $this->assertRequestIsPost($request);
         $this->assertMessageHasHeaders(
             $request,

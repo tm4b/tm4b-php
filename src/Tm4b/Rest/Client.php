@@ -30,27 +30,27 @@ class Client implements ClientInterface
     /**
      * @var HttpClient used to make requests
      */
-    private $httpClient;
+    protected $httpClient;
 
     /**
      * @var array Options for requests and headers
      */
-    private $options;
+    protected $options;
 
     /**
      * @var HydrationInterface
      */
-    private $hydrator;
+    protected $hydrator;
 
     /**
      * @var JsonDecodeStrategy
      */
-    private $decoder;
+    protected $decoder;
 
     /**
      * Valid options for requests that can be overridden with the setOptions
      */
-    private $validOptions = [
+    protected $validOptions = [
         'host' => 'api.tm4b.com',
         'scheme' => 'https',
         'apiKey' => null,
