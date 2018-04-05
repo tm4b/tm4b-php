@@ -8,50 +8,16 @@
 
 namespace Tm4bTest\Rest;
 
-use Http\Message\MessageFactory\DiactorosMessageFactory;
-use Tm4b\Rest\Client;
-use Http\Mock\Client as MockClient;
-use Zend\Diactoros\Request;
-use Zend\Diactoros\Response;
+use Tm4bTest\TestCase;
 use Helmich\Psr7Assert\Psr7Assertions;
 
 /**
  * Class ClientTest
  * @package Tm4bTest\Rest
  */
-class ClientTest extends \PHPUnit_Framework_TestCase
+class ClientTest extends TestCase
 {
     use Psr7Assertions;
-
-    /**
-     * @var MockClient
-     */
-    protected $mockClient;
-
-    /**
-     * @var Request
-     */
-    protected $mockRequest;
-
-    /**
-     * @var string
-     */
-    protected $apiKey;
-
-    /**
-     * API URL
-     */
-    const API_URL = 'https://api.tm4b.com/v1';
-
-    /**
-     * Setup
-     */
-    public function setUp()
-    {
-        $this->apiKey = getenv('TM4B_API_KEY');
-        $this->mockClient = $this->createMockClient();
-        $this->mockRequest = $this->createMockRequest();
-    }
 
     /**
      * @throws \Exception
@@ -59,7 +25,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
      */
     public function testBaseUri()
     {
-        $client = new Client($this->mockClient, ['apiKey' => $this->apiKey]);
+        $client = $this->createMockRestClient();
         $request = $this->createMockRequest();
         $client->send($request);
 
@@ -75,7 +41,7 @@ class ClientTest extends \PHPUnit_Framework_TestCase
      */
     public function testAuthorizationRequest()
     {
-        $client = new Client($this->mockClient, ['apiKey' => $this->apiKey]);
+        $client = $this->createMockRestClient();
         $request = $this->createMockRequest();
         $client->send($request);
 
@@ -90,36 +56,60 @@ class ClientTest extends \PHPUnit_Framework_TestCase
     }
 
     /**
-     * A fake http client to validate the http requests
-     * @return MockClient
+     * Test Get Request
+     * @throws \Http\Client\Exception
      */
-    protected function createMockClient()
+    public function testGet()
     {
-        $http = new MockClient(new DiactorosMessageFactory());
+        $client = $this->createMockRestClient();
+        $client->get('/messages', []);
 
-        return $http;
+        $request = $this->mockClient->getRequests()[0];
+        $this->assertRequestIsGet($request);
     }
 
     /**
-     * Create a mock request to validate the rest client
-     *
-     * @param string $requestMethod
-     * @param array $params
-     * @return Request|static
+     * Test Get Request
+     * @throws \Http\Client\Exception
      */
-    protected function createMockRequest($requestMethod = 'GET', array $params = [])
+    public function testPost()
     {
-        $request = (new \Zend\Diactoros\Request())
-            ->withUri(new \Zend\Diactoros\Uri('https://api.tm4b.com/v1'))
-            ->withMethod($requestMethod);
+        $client = $this->createMockRestClient();
+        $client->post('/messages', ['first_name' => 'John']);
 
-        $request = $request->withHeader('Content-Type', 'application/json');
-        $request = $request->withHeader('Authorization', sprintf("Bearer %s", $this->apiKey));
+        $request = $this->mockClient->getRequests()[0];
+        $this->assertRequestIsPost($request);
+    }
 
-        if ($requestMethod != 'GET') {
-            $request->getBody()->write(json_encode($params));
-        }
+    /**
+     * @throws \Http\Client\Exception
+     */
+    public function testSend()
+    {
+        $client = $this->createMockRestClient();
+        $client->post('/messages', ['first_name' => 'John']);
 
-        return $request;
+        $request = $this->mockClient->getRequests()[0];
+        $this->assertRequestIsPost($request);
+        $this->assertMessageHasHeaders(
+            $request,
+            [
+                'Content-Type' => 'application/json',
+                'Authorization' => sprintf("Bearer %s", $this->apiKey),
+            ]
+        );
+    }
+
+    /**
+     * Test build url with query parameters
+     */
+    public function testBuildUrl()
+    {
+        $client = $this->createMockRestClient();
+        $path   = '/messages';
+        $url    = $client->buildUrl($path);
+        $finalUrl = self::API_URL . $path;
+
+        $this->assertEquals($url, $finalUrl);
     }
 }
