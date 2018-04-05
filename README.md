@@ -1,4 +1,5 @@
 <a href="https://www.tm4b.com"><img src="http://www.tm4b.com/assets/img/logo-white-on-blue.png" width="170px"/></a>
+[![Build Status](https://travis-ci.org/tm4b/tm4b-php.svg?branch=master)](https://travis-ci.org/tm4b/tm4b-php)
 
 [Sign up](https://www.tm4b.com/en/register) for a TM4B account and visit our [Developer Api](https://www.tm4b.com/sms-api/) for even more content.
 
