@@ -7,7 +7,8 @@ env:
   - TM4B_API_KEY=notARealSecretKey
 
 before_script:
-  - composer install
+  - mv .env.sample .env
+  - composer install --no-interaction --optimize-autoloader
 
 script: ./vendor/bin/phpunit -v --configuration ./phpunit.xml.dist
 
