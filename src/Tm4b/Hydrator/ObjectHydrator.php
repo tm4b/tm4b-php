@@ -29,7 +29,7 @@ class ObjectHydrator implements HydrationInterface
             $property = $this->underscoreToCamelCase($key);
             $methodName = sprintf("set%s", ucfirst($property));
             if (method_exists($object, $methodName)) {
-                $this->{$methodName}($value);
+                $object->{$methodName}($value);
             }
         }
 

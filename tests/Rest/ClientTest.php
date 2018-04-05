@@ -8,6 +8,7 @@
 
 namespace Tm4bTest\Rest;
 
+use Tm4b\Rest\Api\Message;
 use Tm4bTest\TestCase;
 use Helmich\Psr7Assert\Psr7Assertions;
 
@@ -111,5 +112,16 @@ class ClientTest extends TestCase
         $finalUrl = self::API_URL . $path;
 
         $this->assertEquals($url, $finalUrl);
+    }
+
+    /**
+     * Test messages instance
+     */
+    public function testMessages()
+    {
+        $client = $this->createMockRestClient();
+        $messages = $client->messages();
+
+        $this->assertInstanceOf(Message::class, $messages);
     }
 }
