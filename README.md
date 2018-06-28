@@ -1,7 +1,7 @@
 <a href="https://www.tm4b.com"><img src="http://www.tm4b.com/assets/img/logo-white-on-blue.png" width="170px"/></a>
 [![Build Status](https://travis-ci.org/tm4b/tm4b-php.svg?branch=master)](https://travis-ci.org/tm4b/tm4b-php)
 
-[Sign up](https://www.tm4b.com/en/register) for a TM4B account and visit our [Developer Api](https://www.tm4b.com/sms-api/) for even more content.
+[Sign up](https://www.tm4b.com/en/register) for a TM4B account and visit our [Developer Api](https://www.tm4b.com/en/sms-api/) for even more content.
 
 # TM4B PHP Client
 
@@ -28,7 +28,7 @@ require 'vendor/autoload.php';
 ```
 
 <a name="quick-start"></a>
-# Quick Start
+## Quick Start
 
 Here is a quick example:
 
@@ -53,3 +53,23 @@ try {
 }
 ```
 
+##Examples
+
+### Bulk SMS
+
+Let's send the same SMS to 2 recipients.
+
+```php
+$response = $msgClient->messages()->send([
+    [
+        'destination_address' => '+447711961111',
+        'source_address'      => 'GeorgeLucas',
+        'content'             => 'There is a civil war between the Galactic Empire and a Rebel Alliance.'
+    ],
+    [
+        'destination_address' => '+97150349030',
+        'source_address'      => 'GeorgeLucas',
+        'content'             => 'There is a civil war between the Galactic Empire and a Rebel Alliance.'
+    ]
+]);
+```
