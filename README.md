@@ -37,6 +37,8 @@ Here is a quick example:
 ```php
 <?php
 
+require 'vendor/autoload.php';
+
 $msgClient = \Tm4b\Rest\Client::create([
     'apiKey' => 'TM4B_API_KEY'
 ]);
