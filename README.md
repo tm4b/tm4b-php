@@ -10,7 +10,7 @@
 
 This is the official PHP library for using the TM4B REST API. This SDK contains methods for easily interacting with the TM4B Messaging API. 
 Below are examples to get you started. For additional examples, please see our official 
-documentation at https://www.tm4b.com/sms-api/
+documentation at https://www.tm4b.com/en/sms-api/
 
 ## Installation
 
