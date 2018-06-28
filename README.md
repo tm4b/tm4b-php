@@ -1,7 +1,10 @@
+[api_doc]: https://www.tm4b.com/en/sms-api/
+[tm4b]: https://www.tm4b.com
+
 <a href="https://www.tm4b.com"><img src="http://www.tm4b.com/assets/img/logo-white-on-blue.png" width="170px"/></a>
 [![Build Status](https://travis-ci.org/tm4b/tm4b-php.svg?branch=master)](https://travis-ci.org/tm4b/tm4b-php)
 
-[Sign up](https://www.tm4b.com/en/register) for a TM4B account and visit our [Developer Api](https://www.tm4b.com/en/sms-api/) for even more content.
+[Sign up](https://www.tm4b.com/en/register) for a TM4B account and visit our [Developer Api][api_doc] for even more content.
 
 # TM4B PHP Client
 
@@ -25,6 +28,19 @@ All examples below assumes you've already included this in your file:
 
 ```php
 require 'vendor/autoload.php';
+```
+
+Initialize your [TM4B][tm4b] Client with your [TM4B API Key][tm4b]:
+
+```php
+<?php
+
+require 'vendor/autoload.php';
+
+$msgClient = \Tm4b\Rest\Client::create([
+    'apiKey' => 'TM4B_API_KEY'
+]);
+
 ```
 
 <a name="quick-start"></a>
