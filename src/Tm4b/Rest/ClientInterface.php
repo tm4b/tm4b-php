@@ -54,4 +54,9 @@ interface ClientInterface
      * @return StrategyInterface
      */
     public function decoder();
+
+    /**
+     * @return bool
+     */
+    public function isSandbox();
 }

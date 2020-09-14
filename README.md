@@ -91,3 +91,16 @@ $response = $msgClient->messages()->send([
     ]
 ]);
 ```
+
+### Sandbox
+
+```php
+$msgClient->setSandbox(true);
+$response = $msgClient->messages()->send([
+    [
+        'destination_address' => '+447711961111',
+        'source_address'      => 'GeorgeLucas',
+        'content'             => 'There is a civil war between the Galactic Empire and a Rebel Alliance.'
+    ]
+]);
+```

@@ -83,7 +83,7 @@ class Message
             }
         }
 
-        $response = $this->client->post('/sms', ['messages' => $messages]);
+        $response = $this->client->post('/sms', ['messages' => $messages, 'sandbox' => $this->client->isSandbox()]);
 
         return $this->client->hydrate($response, null);
     }

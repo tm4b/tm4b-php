@@ -48,6 +48,11 @@ class Client implements ClientInterface
     protected $decoder;
 
     /**
+     * @var bool
+     */
+    protected $sandbox = false;
+
+    /**
      * Valid options for requests that can be overridden with the setOptions
      */
     protected $validOptions = [
@@ -69,6 +74,22 @@ class Client implements ClientInterface
         $this->setOptions($options);
         $this->setHydrator(new ObjectHydrator());
         $this->setDecoder(new JsonDecodeStrategy());
+    }
+
+    /**
+     * @return bool
+     */
+    public function isSandbox()
+    {
+        return $this->sandbox;
+    }
+
+    /**
+     * @param bool $sandbox
+     */
+    public function setSandbox($sandbox)
+    {
+        $this->sandbox = (bool) $sandbox;
     }
 
     /**
