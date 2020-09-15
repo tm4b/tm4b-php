@@ -78,6 +78,14 @@ try {
 Let's send the same SMS to 2 recipients.
 
 ```php
+<?php
+
+require 'vendor/autoload.php';
+
+$msgClient = \Tm4b\Rest\Client::create([
+    'apiKey' => 'TM4B_API_KEY'
+]);
+
 $response = $msgClient->messages()->send([
     [
         'destination_address' => '+447711961111',
@@ -95,6 +103,14 @@ $response = $msgClient->messages()->send([
 ### Sandbox
 
 ```php
+<?php
+
+require 'vendor/autoload.php';
+
+$msgClient = \Tm4b\Rest\Client::create([
+    'apiKey' => 'TM4B_API_KEY'
+]);
+
 $msgClient->setSandbox(true);
 $response = $msgClient->messages()->send([
     [

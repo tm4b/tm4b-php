@@ -5,3 +5,7 @@
 vendor/
 /.env
 /_trash/
+/httpdocs/
+/.dockerignore
+/docker-compose.yml
+/Dockerfile
