@@ -298,6 +298,14 @@ class Client implements ClientInterface
     }
 
     /**
+     * @return Api\Account
+     */
+    public function account()
+    {
+        return new Api\Account($this);
+    }
+
+    /**
      * @return $this
      */
     public function disableHydrator()

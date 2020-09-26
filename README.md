@@ -120,3 +120,36 @@ $response = $msgClient->messages()->send([
     ]
 ]);
 ```
+
+### Account
+
+```php
+<?php
+
+require 'vendor/autoload.php';
+
+$msgClient = \Tm4b\Rest\Client::create([
+    'apiKey' => 'TM4B_API_KEY'
+]);
+$response = $msgClient->account()->describe();
+```
+
+### General Usage
+
+```php
+<?php
+
+require 'vendor/autoload.php';
+
+$msgClient = \Tm4b\Rest\Client::create([
+    'apiKey' => 'TM4B_API_KEY'
+]);
+
+try {
+    $response = $msgClient->get('/account');
+    $data = $msgClient->hydrate($response, null);
+    print_r($data);
+} catch (\Http\Client\Exception $e) {
+    print_r($e->getTraceAsString());
+}
+```
