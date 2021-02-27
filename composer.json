@@ -17,7 +17,7 @@
     ],
     "require": {
         "php": "^5.6 || ^7.0",
-        "php-http/guzzle6-adapter": "^1.0",
+        "php-http/guzzle6-adapter": "^1.0 || ^2.0",
         "zendframework/zend-diactoros": "^1.7",
         "webmozart/assert": "^1.2"
     },
